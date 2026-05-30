@@ -628,6 +628,8 @@ function Feedbacks({ feedbacks, loading, error, onRetry }) {
 }
 
 export default function Dashboard() {
+
+   
   const [active, setActive]     = useState('overview')
   const [sideOpen, setSideOpen] = useState(false)
 
@@ -676,7 +678,18 @@ export default function Dashboard() {
       .finally(() => { if (!cancelled) setLoadingFeedbacks(false) })
     return () => { cancelled = true }
   }, [retryFeedbacks])
-
+  
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('pw') !== 'arief2006') {
+    return (
+      <div className="min-h-screen bg-dark flex items-center justify-center">
+        <div className="text-center">
+          <p className="font-syne text-2xl font-bold text-accent mb-2">403</p>
+          <p className="text-white/50 text-sm">Akses ditolak.</p>
+        </div>
+      </div>
+    )
+  }
   const PAGES = {
     overview:  <Overview  orders={orders} loading={loadingOrders} error={errorOrders} onRetry={() => setRetryOrders(n => n+1)} />,
     orders:    <Orders    orders={orders} setOrders={setOrders} loading={loadingOrders} error={errorOrders} onRetry={() => setRetryOrders(n => n+1)} />,
@@ -692,12 +705,9 @@ export default function Dashboard() {
           <button onClick={() => setSideOpen(true)} className="lg:hidden w-9 h-9 rounded-full bg-white border border-black/6 flex items-center justify-center">
             <Menu size={16} />
           </button>
-          <div className="hidden lg:block">
-            <p className="text-xs text-gray-karsa-muted font-light">Selamat datang kembali 👋</p>
-          </div>
           <div className="flex items-center gap-3 ml-auto">
             <div className="w-8 h-8 rounded-full bg-dark flex items-center justify-center font-syne text-xs font-bold text-accent">A</div>
-            <span className="text-sm font-medium text-dark hidden sm:block">Admin</span>
+            <span className="text-sm font-medium text-dark hidden sm:block">Arief Huda</span>
           </div>
         </header>
         <main className="flex-1 p-6 md:p-8 max-w-5xl w-full mx-auto">
