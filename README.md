@@ -1,16 +1,30 @@
-# React + Vite
+# Karsa Digital - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend website resmi **Karsa Digital** — Agency UI/UX & Web Development.
 
-Currently, two official plugins are available:
+## ✨ Fitur
+- Landing page modern & responsif
+- Portofolio dengan filter kategori (UI/UX, Web Dev, Microsite, dll)
+- Modal detail proyek lengkap
+- Navbar dengan smooth scroll antar section
+- Fully responsive (mobile-first)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Tech Stack
+- **React 18** + **Vite**
+- **Tailwind CSS**
+- **React Router DOM v6**
+- **Lucide React** (icons)
+- Axios
 
-## React Compiler
+## 🖥️ Cara Menjalankan Lokal
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Clone repo
+git clone https://github.com/Ariefhuda434/karsa-digital-fe.git
+cd karsa-digital-fe
 
-## Expanding the ESLint configuration
+# Install dependencies
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Jalankan development server
+npm run dev
