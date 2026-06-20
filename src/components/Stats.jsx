@@ -1,8 +1,8 @@
 const STATS = [
-  { num: '120+', label: 'Proyek selesai\ndengan sukses' },
+  { num: '30+', label: 'Proyek selesai\ndengan sukses' },
   { num: '95%', label: 'Tingkat kepuasan\nklien kami' },
-  { num: '4yr', label: 'Pengalaman di industri\ndigital Indonesia' },
-  { num: '40+', label: 'Klien aktif dari\nberbagai industri' },
+  { num: '2yr', label: 'Pengalaman di industri\ndigital Indonesia' },
+  { num: '10+', label: 'Klien aktif dari\nberbagai industri' },
 ]
 
 export default function Stats() {

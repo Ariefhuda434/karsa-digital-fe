@@ -1,6 +1,5 @@
 const ITEMS = [
-  'UI/UX Design', 'Web Development', 'Mobile App',
-  'System Analysis', 'Branding Digital', 'Konsultasi Teknis',
+  'UI/UX Design', 'Web Development', 'Micro Site', 'Presentasi'
 ]
 
 export default function Ticker() {

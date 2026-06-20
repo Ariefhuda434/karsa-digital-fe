@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight} from 'lucide-react'
 
 export default function Hero() {
   const titleRef = useRef(null)
@@ -47,14 +47,14 @@ export default function Hero() {
 
         <div className="flex items-center gap-4 flex-shrink-0 opacity-0 animate-fadeUp" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
           <a
-            href="#layanan"
+            href="/#layanan"
             className="inline-flex items-center gap-2.5 bg-dark text-accent px-7 py-4 rounded-karsa-pill text-[15px] font-medium hover:-translate-y-0.5 transition-transform duration-200"
           >
             Lihat Layanan
             <ArrowRight size={16} strokeWidth={2.5} />
           </a>
           <a
-            href="#portofolio"
+            href="/#portofolio"
             className="inline-flex items-center gap-2 text-dark text-[15px] border-b border-dark pb-0.5 hover:opacity-60 transition-opacity"
           >
             Lihat Portofolio
