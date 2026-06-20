@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { Monitor, Globe, Layout, Presentation } from 'lucide-react'
+import { Monitor, Globe, Bot, Workflow, Palette } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const CATEGORIES = [
-  { id: 'all',       label: 'Semua Layanan' },
-  { id: 'uiux',      label: 'UI/UX Design'  },
-  { id: 'web',       label: 'Website'       },
-  { id: 'microsite', label: 'Micro Site'    },
-  { id: 'ppt',       label: 'Presentasi'    },
+  { id: 'all',        label: 'Semua Layanan'   },
+  { id: 'uiux',       label: 'UI/UX Design'    },
+  { id: 'web',        label: 'Website'         },
+  { id: 'chatbot',    label: 'Chatbot'         },
+  { id: 'automation', label: 'n8n Automation'  },
+  { id: 'design',     label: 'Design'          },
 ]
 
 const SERVICES = [
@@ -22,22 +23,29 @@ const SERVICES = [
     id: 2, cat: 'web', variant: 'light',
     num: '02', icon: Globe,
     title: 'Website',
-    desc: 'Company profile, landing page, portal bisnis, atau toko online — dibangun modern, cepat, SEO-friendly, dan mudah dikelola.',
-    tags: ['Company Profile', 'Landing Page', 'Toko Online', 'CMS', 'React', 'Laravel'],
+    desc: 'Landing page, company profile, portal bisnis, toko online — dibangun modern, cepat, SEO-friendly, dan mudah dikelola.',
+    tags: ['Landing Page', 'Company Profile', 'Portal Bisnis', 'Toko Online', 'CMS', 'React', 'Laravel'],
   },
   {
-    id: 3, cat: 'microsite', variant: 'accent',
-    num: '03', icon: Layout,
-    title: 'Micro Site',
-    desc: 'Halaman satu tujuan yang tajam dan fokus — cocok untuk kampanye produk, event, peluncuran promo, atau undangan digital yang berkesan.',
-    tags: ['Campaign Page', 'Event Page', 'Promo', 'Undangan Digital'],
+    id: 3, cat: 'chatbot', variant: 'accent',
+    num: '03', icon: Bot,
+    title: 'Chatbot',
+    desc: 'Bot WhatsApp, Telegram, atau AI chatbot untuk customer service, lead generation, dan otomatisasi chat — siap integrasi dengan sistem kamu.',
+    tags: ['WhatsApp Bot', 'Telegram Bot', 'AI Chatbot', 'Integrasi API', 'Customer Service'],
   },
   {
-    id: 4, cat: 'ppt', variant: 'light',
-    num: '04', icon: Presentation,
-    title: 'Presentasi',
-    desc: 'Pitch deck, proposal klien, laporan tahunan, atau materi pelatihan — kami desain slide yang profesional dan menyampaikan pesan dengan jelas.',
-    tags: ['Pitch Deck', 'Proposal', 'Annual Report', 'PowerPoint / Keynote'],
+    id: 4, cat: 'automation', variant: 'light',
+    num: '04', icon: Workflow,
+    title: 'n8n Automation',
+    desc: 'Otomatisasi workflow dengan n8n — hubungkan aplikasi, kirim notifikasi otomatis, scraping data, dan integrasi API tanpa coding rumit.',
+    tags: ['Workflow Otomatis', 'Integrasi API', 'Scraping Data', 'Notifikasi', 'n8n'],
+  },
+  {
+    id: 5, cat: 'design', variant: 'dark',
+    num: '05', icon: Palette,
+    title: 'Design (Canva & Figma)',
+    desc: 'Desain komik Canva, tugas kuliah, infografis, presentasi kreatif, dan materi visual lainnya — cepat, menarik, dan sesuai kebutuhan.',
+    tags: ['Desain Komik', 'Tugas Kuliah', 'Infografis', 'Presentasi Kreatif', 'Canva', 'Figma'],
   },
 ]
 

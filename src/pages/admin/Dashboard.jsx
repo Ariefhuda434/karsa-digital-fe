@@ -14,7 +14,7 @@ const STATUS_CONFIG = {
   cancelled:   { label:'Dibatalkan',      bg:'bg-red-100',    text:'text-red-600'    },
 }
 
-const CAT_LABEL = { uiux:'UI/UX Design', web:'Web Dev', mobile:'Mobile App', system:'System Analysis' }
+const CAT_LABEL = { uiux:'UI/UX Design', web:'Web Dev', mobile:'Mobile App', system:'System Analysis', chatbot:'Chatbot', automation:'n8n Automation', design:'Design' }
 
 function StatusBadge({ status }) {
   const c = STATUS_CONFIG[status] || STATUS_CONFIG.pending
@@ -586,9 +586,23 @@ function Projects({ projects, setProjects, loading, error, onRetry }) {
   )
 }
 
-function Feedbacks({ feedbacks, loading, error, onRetry }) {
+function Feedbacks({ feedbacks, setFeedbacks, loading, error, onRetry }) {
+  const [togglingId, setTogglingId] = useState(null)
+
   if (loading) return <LoadingState text="Memuat feedback..." />
   if (error)   return <ErrorState message={error} onRetry={onRetry} />
+
+  const toggleFeatured = async (fb) => {
+    setTogglingId(fb.id)
+    try {
+      const res = await api.patch(`/admin/feedbacks/${fb.id}`, { is_featured: !fb.is_featured })
+      setFeedbacks(prev => prev.map(f => f.id === fb.id ? res.data : f))
+    } catch (err) {
+      alert('Gagal mengubah status: ' + (err.response?.data?.message || err.message))
+    } finally {
+      setTogglingId(null)
+    }
+  }
 
   return (
     <div>
@@ -609,14 +623,25 @@ function Feedbacks({ feedbacks, loading, error, onRetry }) {
                   <p className="font-syne font-bold text-dark text-sm">{f.name}</p>
                   {f.company && <p className="text-xs text-gray-karsa-muted mt-0.5">{f.company}</p>}
                 </div>
-                {f.rating && (
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} size={13}
-                        className={i < f.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-karsa-2'} />
-                    ))}
-                  </div>
-                )}
+                <div className="flex items-center gap-3">
+                  {f.rating && (
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} size={13}
+                          className={i < f.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-karsa-2'} />
+                      ))}
+                    </div>
+                  )}
+                  <button onClick={() => toggleFeatured(f)} disabled={togglingId === f.id}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-karsa-pill text-xs font-semibold border transition-all ${
+                      f.is_featured
+                        ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+                        : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100'
+                    }`}>
+                    {togglingId === f.id ? <Loader2 size={11} className="animate-spin" /> : null}
+                    {f.is_featured ? 'Published' : 'Draft'}
+                  </button>
+                </div>
               </div>
               {f.content && <p className="text-sm text-gray-karsa-muted font-light leading-relaxed">"{f.content}"</p>}
             </div>
@@ -672,7 +697,7 @@ export default function Dashboard() {
   useEffect(() => {
     let cancelled = false
     setLoadingFeedbacks(true); setErrorFeedbacks(null)
-    api.get('/feedbacks')
+    api.get('/admin/feedbacks')
       .then(res => { if (!cancelled) setFeedbacks(res.data?.data ?? res.data) })
       .catch(err => { if (!cancelled) setErrorFeedbacks(err.response?.data?.message || 'Tidak bisa terhubung ke server.') })
       .finally(() => { if (!cancelled) setLoadingFeedbacks(false) })
@@ -694,7 +719,7 @@ export default function Dashboard() {
     overview:  <Overview  orders={orders} loading={loadingOrders} error={errorOrders} onRetry={() => setRetryOrders(n => n+1)} />,
     orders:    <Orders    orders={orders} setOrders={setOrders} loading={loadingOrders} error={errorOrders} onRetry={() => setRetryOrders(n => n+1)} />,
     projects:  <Projects  projects={projects} setProjects={setProjects} loading={loadingProjects} error={errorProjects} onRetry={() => setRetryProjects(n => n+1)} />,
-    feedbacks: <Feedbacks feedbacks={feedbacks} loading={loadingFeedbacks} error={errorFeedbacks} onRetry={() => setRetryFeedbacks(n => n+1)} />,
+    feedbacks: <Feedbacks feedbacks={feedbacks} setFeedbacks={setFeedbacks} loading={loadingFeedbacks} error={errorFeedbacks} onRetry={() => setRetryFeedbacks(n => n+1)} />,
   }
 
   return (
