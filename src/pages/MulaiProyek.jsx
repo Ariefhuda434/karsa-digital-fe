@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-  Monitor, Code, Smartphone, GitBranch,
+  Monitor, Globe, Bot, Workflow, Palette,
   ArrowRight, ArrowLeft, Check, Loader2,
   User, Mail, Phone, FileText, DollarSign, ChevronDown
 } from 'lucide-react'
@@ -16,25 +16,32 @@ const SERVICES = [
     price: 'Mulai Rp 50.000',
   },
   {
-    id: 'web', icon: Code, label: 'Website',
-    desc: 'Company profile, landing page, portal bisnis, atau toko online — dibangun modern, cepat, SEO-friendly, dan mudah dikelola.',
-    tags: ['Company Profile', 'Landing Page', 'Toko Online', 'React', 'Laravel'],
+    id: 'web', icon: Globe, label: 'Website',
+    desc: 'Landing page, company profile, portal bisnis, toko online — dibangun modern, cepat, SEO-friendly, dan mudah dikelola.',
+    tags: ['Landing Page', 'Company Profile', 'Portal Bisnis', 'Toko Online', 'CMS', 'React', 'Laravel'],
     color: 'bg-[#1A3A20]',
     price: 'Mulai Rp 200.000',
   },
   {
-    id: 'microsite', icon: Smartphone, label: 'Micro Site',
-    desc: 'Halaman satu tujuan yang tajam — cocok untuk kampanye produk, event, promo, atau undangan digital yang berkesan.',
-    tags: ['Campaign Page', 'Event Page', 'Promo', 'Undangan Digital'],
+    id: 'chatbot', icon: Bot, label: 'Chatbot',
+    desc: 'Bot WhatsApp, Telegram, atau AI chatbot untuk customer service, lead generation, dan otomatisasi chat — siap integrasi dengan sistem kamu.',
+    tags: ['WhatsApp Bot', 'Telegram Bot', 'AI Chatbot', 'Integrasi API', 'Customer Service'],
     color: 'bg-[#2E1A12]',
     price: 'Mulai Rp 50.000',
   },
   {
-    id: 'ppt', icon: GitBranch, label: 'Presentasi',
-    desc: 'Pitch deck, proposal klien, laporan tahunan — kami desain slide profesional yang menyampaikan pesan dengan jelas.',
-    tags: ['Pitch Deck', 'Proposal', 'Annual Report', 'PowerPoint / Keynote'],
+    id: 'automation', icon: Workflow, label: 'n8n Automation',
+    desc: 'Otomatisasi workflow dengan n8n — hubungkan aplikasi, kirim notifikasi otomatis, scraping data, dan integrasi API tanpa coding rumit.',
+    tags: ['Workflow Otomatis', 'Integrasi API', 'Scraping Data', 'Notifikasi', 'n8n'],
     color: 'bg-[#221A2E]',
-    price: 'Mulai Rp 50.000',
+    price: 'Mulai Rp 100.000',
+  },
+  {
+    id: 'design', icon: Palette, label: 'Design (Canva & Figma)',
+    desc: 'Desain komik Canva, tugas kuliah, infografis, dan materi visual lainnya — cepat, menarik, dan sesuai kebutuhan.',
+    tags: ['Desain Komik', 'Tugas Kuliah', 'Infografis', 'Presentasi Kreatif', 'Canva', 'Figma'],
+    color: 'bg-[#1A3A30]',
+    price: 'Mulai Rp 30.000',
   },
 ]
 
