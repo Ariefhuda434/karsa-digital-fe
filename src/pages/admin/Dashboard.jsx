@@ -404,7 +404,7 @@ function Projects({ projects, setProjects, loading, error, onRetry }) {
   const del = async (id) => {
     setDeleting(true)
     try {
-      await api.delete(`/projects/${id}`)
+      await api.delete(`/admin/projects/${id}`)
       setProjects(prev => prev.filter(p => p.id !== id))
       setDelId(null)
     } catch (err) {
