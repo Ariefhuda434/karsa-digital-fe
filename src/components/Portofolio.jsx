@@ -2,12 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../lib/axios'
 
-// Fallback jika API belum ready
-const FALLBACK = [
-  { id:1, title:'DanaKita — Fintech App',        label:'UI/UX Design',    sub:'Mobile · 500K Pengguna',     bg_color:'#1A1F3A', size:'md:col-span-7 md:row-span-2' },
-  { id:2, title:'Pasar Lokal — E-Commerce',      label:'Web Development', sub:'UMKM · Laravel + Vue.js',    bg_color:'#1A3A30', size:'md:col-span-5' },
-  { id:3, title:'RumahSehat — Klinik Dashboard', label:'System Analysis', sub:'Enterprise · Dokumentasi',   bg_color:'#2E3220', size:'md:col-span-5' },
-]
+const LABEL_MAP = { uiux:'UI/UX Design', web:'Web Development', mobile:'Mobile App', system:'System Analysis', chatbot:'Chatbot', automation:'n8n Automation', design:'Design' }
 
 const SIZE_MAP = [
   'md:col-span-7 md:row-span-2',
@@ -20,22 +15,22 @@ export default function Portofolio() {
   const [loading, setLoading]   = useState(true)
 
   useEffect(() => {
-    api.get('/projects?featured=1&limit=3')
+    api.get('/projects')
       .then(r => {
-        const data = r.data?.data ?? []
+        const data = r.data?.data ?? r.data ?? []
         const mapped = data.slice(0, 3).map((p, i) => ({
           ...p,
-          label: { uiux:'UI/UX Design', web:'Web Development', mobile:'Mobile App', system:'System Analysis' }[p.category] ?? p.category,
+          label: LABEL_MAP[p.category] ?? p.category,
           sub:   `${p.client_name ?? ''}${p.duration_weeks ? ` · ${p.duration_weeks} minggu` : ''}`,
           size:  SIZE_MAP[i] ?? 'md:col-span-4',
         }))
-        setProjects(mapped.length ? mapped : FALLBACK)
+        setProjects(mapped)
       })
-      .catch(() => setProjects(FALLBACK))
+      .catch(() => {})
       .finally(() => setLoading(false))
   }, [])
 
-  const list = loading ? FALLBACK : projects
+  const list = projects
 
   return (
     <section id="portofolio" className="px-6 md:px-12 pb-24">
